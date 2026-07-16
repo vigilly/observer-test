@@ -1,5 +1,5 @@
 {
-  "name": "vigilly-observer",
+  "name": "@vigilly/observer",
   "version": "0.1.0",
   "description": "Local live telemetry viewer for vigilly-instrumented apps — see logs, traces, exceptions and metrics as they are emitted, in a simple web UI.",
   "license": "MIT",
@@ -32,6 +32,9 @@
   ],
   "engines": {
     "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "tsc",
