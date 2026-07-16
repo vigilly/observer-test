@@ -7,6 +7,21 @@
     "type": "git",
     "url": "git+https://github.com/vigilly/observer-test.git"
   },
+  "homepage": "https://github.com/vigilly/observer-test#readme",
+  "bugs": {
+    "url": "https://github.com/vigilly/observer-test/issues"
+  },
+  "keywords": [
+    "telemetry",
+    "observability",
+    "otlp",
+    "opentelemetry",
+    "sentry",
+    "datadog",
+    "prometheus",
+    "vigilly",
+    "cli"
+  ],
   "type": "module",
   "bin": {
     "vigilly-observer": "dist/cli.js"
@@ -21,6 +36,7 @@
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",
+    "prepublishOnly": "npm test",
     "dev": "tsx src/cli.ts",
     "start": "node dist/cli.js",
     "demo": "tsx src/cli.ts demo",
