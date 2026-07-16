@@ -1,0 +1,37 @@
+{
+  "name": "vigilly-observer",
+  "version": "0.1.0",
+  "description": "Local live telemetry viewer for vigilly-instrumented apps — see logs, traces, exceptions and metrics as they are emitted, in a simple web UI.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "vigilly-observer": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "proto"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "start": "node dist/cli.js",
+    "demo": "tsx src/cli.ts demo",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.12.5",
+    "@grpc/proto-loader": "^0.7.13",
+    "@msgpack/msgpack": "^3.0.0",
+    "protobufjs": "^7.4.0",
+    "snappyjs": "^0.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.8"
+  }
+}
