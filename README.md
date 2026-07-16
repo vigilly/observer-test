@@ -34,18 +34,20 @@ the observer — no matter how your service is instrumented, it just works.
 
 ## Quick start
 
+No install, no clone — run it directly with npx:
+
 ```bash
-npm install
-npm run build
-node dist/cli.js
+npx github:vigilly/observer-test
 ```
+
+(Once the package is published to npm this shortens to `npx vigilly-observer`.)
 
 Open the printed **Web UI** URL (default <http://localhost:4318>).
 
 Want to see it in action right now? In another terminal:
 
 ```bash
-node dist/cli.js demo
+npx github:vigilly/observer-test demo
 ```
 
 You'll immediately see a Sentry exception, OTLP logs/trace/metrics (over HTTP **and** gRPC),
@@ -64,7 +66,7 @@ OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4318
 DD_TRACE_AGENT_URL=http://localhost:8126
 
 # Prometheus — expose /metrics and let the observer scrape it
-node dist/cli.js --scrape http://localhost:9464/metrics
+npx github:vigilly/observer-test --scrape http://localhost:9464/metrics
 ```
 
 The vigilly SDK preserves the DSN's `http` scheme and port, so envelopes tunnel to
@@ -114,6 +116,7 @@ SSE — a freshly opened tab gets a snapshot of recent events, then live updates
 ## Development
 
 ```bash
+npm install      # also builds dist/ via the prepare script
 npm run dev      # run from source via tsx (no build)
 npm run build    # tsc -> dist/
 npm test         # vitest parser tests

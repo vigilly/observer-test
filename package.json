@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "Local live telemetry viewer for vigilly-instrumented apps — see logs, traces, exceptions and metrics as they are emitted, in a simple web UI.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vigilly/observer-test.git"
+  },
   "type": "module",
   "bin": {
     "vigilly-observer": "dist/cli.js"
@@ -16,6 +20,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "dev": "tsx src/cli.ts",
     "start": "node dist/cli.js",
     "demo": "tsx src/cli.ts demo",
