@@ -66,7 +66,15 @@ export function startGrpcServer(store: EventStore, host: string, port: number): 
         port: boundPort,
         close: () =>
           new Promise<void>((res) => {
-            server.tryShutdown(() => res());
+            const force = setTimeout(() => {
+              server.forceShutdown();
+              res();
+            }, 1000);
+            force.unref();
+            server.tryShutdown(() => {
+              clearTimeout(force);
+              res();
+            });
           }),
       });
     });

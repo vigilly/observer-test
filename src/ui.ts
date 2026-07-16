@@ -105,7 +105,7 @@ export const INDEX_HTML = `<!doctype html>
 </div>
 <main id="main">
   <div class="empty" id="empty">
-    Waiting for telemetry… point an app at this collector, or run <code>vigilly-observer demo</code>.
+    Waiting for telemetry… point an app at this collector, or run <code>npx @vigilly/observer demo</code>.
   </div>
   <div id="list"></div>
 </main>
@@ -262,6 +262,7 @@ export const INDEX_HTML = `<!doctype html>
     else pauseBtn.textContent = "Resume";
   };
   document.getElementById("clearBtn").onclick = function () {
+    fetch("/clear", { method: "POST" }).catch(function () {});
     events = []; counts = { all: 0, log: 0, trace: 0, exception: 0, metric: 0 };
     pendingCount = 0; paused = false; pauseBtn.textContent = "Pause";
     listEl.innerHTML = ""; updateCounts();

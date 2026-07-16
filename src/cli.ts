@@ -163,7 +163,7 @@ function printBanner(): void {
   if (grpcHandle) lines.push(dim(`                 (add OTEL_EXPORTER_OTLP_PROTOCOL=grpc + port ${grpcPort} for gRPC)`));
   lines.push(`    Datadog:     ${cyan(`DD_TRACE_AGENT_URL=http://${uiHost}:${ddServer ? ddPort : port}`)}`);
   lines.push("");
-  lines.push(dim(`  No app yet? Run  `) + cyan("vigilly-observer demo") + dim("  to see sample data."));
+  lines.push(dim(`  No app yet? Run  `) + cyan("npx @vigilly/observer demo") + dim("  to see sample data."));
   lines.push("");
   console.log(lines.join("\n"));
 }
@@ -172,10 +172,22 @@ let shuttingDown = false;
 async function shutdown(): Promise<void> {
   if (shuttingDown) return;
   shuttingDown = true;
+  // Failsafe: exit even if some connection refuses to die.
+  setTimeout(() => process.exit(0), 2000).unref();
   scraper?.stop();
+  // server.close() alone never completes while SSE streams are open, so
+  // destroy live connections too.
   await Promise.allSettled([
-    new Promise<void>((r) => mainServer.close(() => r())),
-    ddServer ? new Promise<void>((r) => ddServer!.close(() => r())) : Promise.resolve(),
+    new Promise<void>((r) => {
+      mainServer.close(() => r());
+      mainServer.closeAllConnections();
+    }),
+    ddServer
+      ? new Promise<void>((r) => {
+          ddServer!.close(() => r());
+          ddServer!.closeAllConnections();
+        })
+      : Promise.resolve(),
     grpcHandle ? grpcHandle.close() : Promise.resolve(),
   ]);
   process.exit(0);

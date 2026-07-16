@@ -69,7 +69,7 @@ export class EventStore extends EventEmitter {
     return this.buffer.slice();
   }
 
-  /** Drop all buffered events (the UI "Clear" is client-side; this is for tests). */
+  /** Drop all buffered events (backs the UI "Clear" button via POST /clear). */
   clear(): void {
     this.buffer.length = 0;
   }

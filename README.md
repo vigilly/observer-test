@@ -124,6 +124,16 @@ npm test         # vitest parser tests
 
 CI runs the build, tests, and an end-to-end smoke test (`scripts/smoke.mjs`) on Node 20 & 22.
 
+## About vigilly
+
+This observer is the local companion to **[vigilly](https://vigilly.dev)** —
+*observability without the bill shock*. vigilly gives you metric dashboards,
+AI-deduplicated error tracking, and on-call alerting from **€2/month per service**,
+speaking the protocols your stack already uses (OpenTelemetry, Sentry, Datadog,
+Prometheus) — no re-instrumentation, no lock-in. Once your telemetry looks right
+here, point your app at [vigilly](https://vigilly.dev) and it lands in production
+dashboards, error tracking, and alerts.
+
 ## Notes
 
 - **Local dev tool.** In-memory only — no persistence, no auth, no TLS, and nothing is

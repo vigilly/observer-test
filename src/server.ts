@@ -139,6 +139,11 @@ async function handle(
     sendJson(res, 200, meta);
     return;
   }
+  if (method === "POST" && path === "/clear") {
+    store.clear();
+    sendJson(res, 200, {});
+    return;
+  }
   if (path === "/favicon.ico") {
     res.writeHead(204);
     res.end();
